@@ -641,7 +641,7 @@ body.tv-mode .hide-tv { display: none !important; }
       </div>
 
       <!-- Reset -->
-      <button class="icon-btn" onclick="resetGame()" title="Reiniciar">
+      <button class="icon-btn" onclick="confirmReset()" title="Reiniciar">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
           <polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 .49-4.5"/>
         </svg>
@@ -918,6 +918,19 @@ function drawNumber() {
 }
 
 // ─── Reset ───────────────────────────────
+function confirmReset() {
+  if (drawn.length === 0) {
+    // Se não há números sorteados, resetar direto sem aviso
+    resetGame();
+    return;
+  }
+
+  // Pedir confirmação
+  if (confirm('Tem certeza que deseja reiniciar? Todos os números sorteados serão apagados.')) {
+    resetGame();
+  }
+}
+
 function resetGame() {
   if (isAnimating) return;
   pool = []; drawn = [];
